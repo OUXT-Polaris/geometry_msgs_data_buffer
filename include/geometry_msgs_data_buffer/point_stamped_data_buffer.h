@@ -1,6 +1,12 @@
 #ifndef GEOMETRY_MSGS_DATA_BUFFER_POINT_STAMPED_DATA_BUFFER_H_INCLUDED
 #define GEOMETRY_MSGS_DATA_BUFFER_POINT_STAMPED_DATA_BUFFER_H_INCLUDED
 
+//headers in data buffer
+#include <data_buffer/data_buffer_base.h>
+
+//headers in ROS
+#include <geometry_msgs/PointStamped.h>
+
 namespace data_buffer
 {
     class PointStampedDataBuffer : public DataBufferBase<geometry_msgs::PointStamped>

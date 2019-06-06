@@ -25,7 +25,8 @@ include_directories(
   ${EIGEN3_INCLUDE_DIR}
 )
 
-add_library(geometry_msgs_data_buffer 
+add_library(geometry_msgs_data_buffer
+  src/point_stamped_data_buffer.cpp
   src/pose_stamped_data_buffer.cpp
   src/twist_stamped_data_buffer.cpp)
 target_link_libraries(geometry_msgs_data_buffer ${catkin_LIBRARIES})
@@ -35,4 +36,9 @@ install(TARGETS geometry_msgs_data_buffer
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+# install headers
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
