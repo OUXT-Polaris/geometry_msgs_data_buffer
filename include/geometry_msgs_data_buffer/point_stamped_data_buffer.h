@@ -5,17 +5,17 @@
 #include <data_buffer/data_buffer_base.h>
 
 //headers in ROS
-#include <geometry_msgs/PointStamped.h>
+#include <geometry_msgs/msg/point_stamped.hpp>
 
 namespace data_buffer
 {
-    class PointStampedDataBuffer : public DataBufferBase<geometry_msgs::PointStamped>
+    class PointStampedDataBuffer : public DataBufferBase<geometry_msgs::msg::PointStamped>
     {
     public:
-        PointStampedDataBuffer(std::string key,double buffer_length);
+        PointStampedDataBuffer(std::shared_ptr<rclcpp::Node> node_ptr,std::string key,double buffer_length);
         ~PointStampedDataBuffer();
     private:
-        geometry_msgs::PointStamped interpolate(geometry_msgs::PointStamped data0,geometry_msgs::PointStamped data1,ros::Time stamp) override;
+        geometry_msgs::msg::PointStamped interpolate(geometry_msgs::msg::PointStamped data0,geometry_msgs::msg::PointStamped data1,rclcpp::Time stamp) override;
     };
 }
 

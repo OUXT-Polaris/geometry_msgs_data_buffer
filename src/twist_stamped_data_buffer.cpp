@@ -2,7 +2,8 @@
 
 namespace data_buffer
 {
-    TwistStampedDataBuffer::TwistStampedDataBuffer(std::string key,double buffer_length) : DataBufferBase<geometry_msgs::TwistStamped>(key,buffer_length)
+    TwistStampedDataBuffer::TwistStampedDataBuffer(std::shared_ptr<rclcpp::Node> node_ptr,std::string key,double buffer_length) 
+        : DataBufferBase<geometry_msgs::msg::TwistStamped>(node_ptr,key,buffer_length)
     {
 
     }
@@ -12,30 +13,32 @@ namespace data_buffer
 
     }
 
-    geometry_msgs::TwistStamped TwistStampedDataBuffer::interpolate(geometry_msgs::TwistStamped data0,geometry_msgs::TwistStamped data1,ros::Time stamp)
+    geometry_msgs::msg::TwistStamped TwistStampedDataBuffer::interpolate(geometry_msgs::msg::TwistStamped data0,geometry_msgs::msg::TwistStamped data1,rclcpp::Time stamp)
     {
-        geometry_msgs::TwistStamped ret;
-        ROS_ASSERT(data0.header.frame_id == data1.header.frame_id);
+        geometry_msgs::msg::TwistStamped ret;
+        assert(data0.header.frame_id == data1.header.frame_id);
         ret.header.frame_id = data0.header.frame_id;
         ret.header.stamp = stamp;
-        ret.twist.linear.x = ((data0.twist.linear.x*(data1.header.stamp-stamp).toSec()) + 
-            (data1.twist.linear.x*(stamp-data0.header.stamp).toSec()))
-            /(data1.header.stamp-data0.header.stamp).toSec();
-        ret.twist.linear.y = ((data0.twist.linear.y*(data1.header.stamp-stamp).toSec()) + 
-            (data1.twist.linear.y*(stamp-data0.header.stamp).toSec()))
-            /(data1.header.stamp-data0.header.stamp).toSec();
-        ret.twist.linear.z = ((data0.twist.linear.z*(data1.header.stamp-stamp).toSec()) + 
-            (data1.twist.linear.z*(stamp-data0.header.stamp).toSec()))
-            /(data1.header.stamp-data0.header.stamp).toSec();
-        ret.twist.angular.x = ((data0.twist.angular.x*(data1.header.stamp-stamp).toSec()) + 
-            (data1.twist.angular.x*(stamp-data0.header.stamp).toSec()))
-            /(data1.header.stamp-data0.header.stamp).toSec();
-        ret.twist.angular.y = ((data0.twist.angular.y*(data1.header.stamp-stamp).toSec()) + 
-            (data1.twist.angular.y*(stamp-data0.header.stamp).toSec()))
-            /(data1.header.stamp-data0.header.stamp).toSec();
-        ret.twist.angular.z = ((data0.twist.angular.z*(data1.header.stamp-stamp).toSec()) + 
-            (data1.twist.angular.z*(stamp-data0.header.stamp).toSec()))
-            /(data1.header.stamp-data0.header.stamp).toSec();
+        rclcpp::Time data0_stamp = data0.header.stamp;
+        rclcpp::Time data1_stamp = data1.header.stamp;
+        ret.twist.linear.x = ((data0.twist.linear.x*toSec(data1_stamp-stamp)) + 
+            (data1.twist.linear.x*toSec(stamp-data0_stamp)))
+            /toSec(data1_stamp-data0_stamp);
+        ret.twist.linear.y = ((data0.twist.linear.y*toSec(data1_stamp-stamp)) + 
+            (data1.twist.linear.y*toSec(stamp-data0_stamp)))
+            /toSec(data1_stamp-data0_stamp);
+        ret.twist.linear.z = ((data0.twist.linear.z*toSec(data1_stamp-stamp)) + 
+            (data1.twist.linear.z*toSec(stamp-data0_stamp)))
+            /toSec(data1_stamp-data0_stamp);
+        ret.twist.angular.x = ((data0.twist.angular.x*toSec(data1_stamp-stamp)) + 
+            (data1.twist.angular.x*toSec(stamp-data0_stamp)))
+            /toSec(data1_stamp-data0_stamp);
+        ret.twist.angular.y = ((data0.twist.angular.y*toSec(data1_stamp-stamp)) + 
+            (data1.twist.angular.y*toSec(stamp-data0_stamp)))
+            /toSec(data1_stamp-data0_stamp);
+        ret.twist.angular.z = ((data0.twist.angular.z*toSec(data1_stamp-stamp)) + 
+            (data1.twist.angular.z*toSec(stamp-data0_stamp)))
+            /toSec(data1_stamp-data0_stamp);
         return ret;
     }
 }

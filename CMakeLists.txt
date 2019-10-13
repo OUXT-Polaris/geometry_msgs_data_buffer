@@ -1,27 +1,29 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(geometry_msgs_data_buffer)
 
-add_compile_options(-std=c++11)
+# Default to C99
+if(NOT CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
+endif()
 
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(data_buffer REQUIRED)
+find_package(quaternion_operation REQUIRED)
 find_package(Eigen3 REQUIRED)
-
-find_package(catkin REQUIRED COMPONENTS
-  data_buffer
-  geometry_msgs
-  roscpp
-  quaternion_operation
-)
-
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES geometry_msgs_data_buffer
-  CATKIN_DEPENDS data_buffer geometry_msgs roscpp
-#  DEPENDS system_lib
-)
 
 include_directories(
   include
-  ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
 )
 
@@ -29,16 +31,20 @@ add_library(geometry_msgs_data_buffer
   src/point_stamped_data_buffer.cpp
   src/pose_stamped_data_buffer.cpp
   src/twist_stamped_data_buffer.cpp)
-target_link_libraries(geometry_msgs_data_buffer ${catkin_LIBRARIES})
+ament_target_dependencies(geometry_msgs_data_buffer rclcpp data_buffer geometry_msgs quaternion_operation)
 
 # install executables/libs
-install(TARGETS geometry_msgs_data_buffer
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+install(TARGETS
+  geometry_msgs_data_buffer
+  DESTINATION lib/${PROJECT_NAME}
 )
 
-# install headers
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+# Install header files
+install(DIRECTORY include/${PROJECT_NAME}
+  DESTINATION include/${PROJECT_NAME}
+  FILES_MATCHING PATTERN "*.h"
 )
+
+ament_export_dependencies(rosidl_default_runtime)
+
+ament_package()

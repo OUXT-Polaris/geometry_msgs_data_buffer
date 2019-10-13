@@ -5,18 +5,18 @@
 #include <data_buffer/data_buffer_base.h>
 
 //headers in ROS
-#include <geometry_msgs/TwistStamped.h>
+#include <geometry_msgs/msg/twist_stamped.hpp>
 #include <quaternion_operation/quaternion_operation.h>
 
 namespace data_buffer
 {
-    class TwistStampedDataBuffer : public DataBufferBase<geometry_msgs::TwistStamped>
+    class TwistStampedDataBuffer : public DataBufferBase<geometry_msgs::msg::TwistStamped>
     {
     public:
-        TwistStampedDataBuffer(std::string key,double buffer_length);
+        TwistStampedDataBuffer(std::shared_ptr<rclcpp::Node> node_ptr,std::string key,double buffer_length);
         ~TwistStampedDataBuffer();
     private:
-        geometry_msgs::TwistStamped interpolate(geometry_msgs::TwistStamped data0,geometry_msgs::TwistStamped data1,ros::Time stamp) override;
+        geometry_msgs::msg::TwistStamped interpolate(geometry_msgs::msg::TwistStamped data0,geometry_msgs::msg::TwistStamped data1,rclcpp::Time stamp) override;
     };
 }
 
