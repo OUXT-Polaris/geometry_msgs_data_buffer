@@ -2,7 +2,7 @@
 
 namespace data_buffer
 {
-    PoseStampedDataBuffer::PoseStampedDataBuffer(rclcpp::Clock clock,std::string key,double buffer_length) 
+    PoseStampedDataBuffer::PoseStampedDataBuffer(rclcpp::Clock::SharedPtr clock,std::string key,double buffer_length) 
         : DataBufferBase<geometry_msgs::msg::PoseStamped>(clock,key,buffer_length)
     {
 

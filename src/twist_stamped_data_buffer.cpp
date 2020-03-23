@@ -2,7 +2,7 @@
 
 namespace data_buffer
 {
-    TwistStampedDataBuffer::TwistStampedDataBuffer(rclcpp::Clock clock,std::string key,double buffer_length) 
+    TwistStampedDataBuffer::TwistStampedDataBuffer(rclcpp::Clock::SharedPtr clock,std::string key,double buffer_length) 
         : DataBufferBase<geometry_msgs::msg::TwistStamped>(clock,key,buffer_length)
     {
 
