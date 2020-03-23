@@ -2,8 +2,8 @@
 
 namespace data_buffer
 {
-    TwistStampedDataBuffer::TwistStampedDataBuffer(std::shared_ptr<rclcpp::Node> node_ptr,std::string key,double buffer_length) 
-        : DataBufferBase<geometry_msgs::msg::TwistStamped>(node_ptr,key,buffer_length)
+    TwistStampedDataBuffer::TwistStampedDataBuffer(rclcpp::Clock clock,std::string key,double buffer_length) 
+        : DataBufferBase<geometry_msgs::msg::TwistStamped>(clock,key,buffer_length)
     {
 
     }

@@ -13,7 +13,7 @@ namespace data_buffer
     class TwistStampedDataBuffer : public DataBufferBase<geometry_msgs::msg::TwistStamped>
     {
     public:
-        TwistStampedDataBuffer(std::shared_ptr<rclcpp::Node> node_ptr,std::string key,double buffer_length);
+        TwistStampedDataBuffer(rclcpp::Clock clock,std::string key,double buffer_length);
         ~TwistStampedDataBuffer();
     private:
         geometry_msgs::msg::TwistStamped interpolate(geometry_msgs::msg::TwistStamped data0,geometry_msgs::msg::TwistStamped data1,rclcpp::Time stamp) override;

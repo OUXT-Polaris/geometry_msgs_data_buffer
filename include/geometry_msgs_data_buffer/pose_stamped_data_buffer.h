@@ -13,7 +13,7 @@ namespace data_buffer
     class PoseStampedDataBuffer : public DataBufferBase<geometry_msgs::msg::PoseStamped>
     {
     public:
-        PoseStampedDataBuffer(std::shared_ptr<rclcpp::Node> node_ptr,std::string key,double buffer_length);
+        PoseStampedDataBuffer(rclcpp::Clock clock,std::string key,double buffer_length);
         ~PoseStampedDataBuffer();
     private:
         geometry_msgs::msg::PoseStamped interpolate(geometry_msgs::msg::PoseStamped data0,geometry_msgs::msg::PoseStamped data1,rclcpp::Time stamp) override;

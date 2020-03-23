@@ -12,7 +12,7 @@ namespace data_buffer
     class PointStampedDataBuffer : public DataBufferBase<geometry_msgs::msg::PointStamped>
     {
     public:
-        PointStampedDataBuffer(std::shared_ptr<rclcpp::Node> node_ptr,std::string key,double buffer_length);
+        PointStampedDataBuffer(rclcpp::Clock clock,std::string key,double buffer_length);
         ~PointStampedDataBuffer();
     private:
         geometry_msgs::msg::PointStamped interpolate(geometry_msgs::msg::PointStamped data0,geometry_msgs::msg::PointStamped data1,rclcpp::Time stamp) override;

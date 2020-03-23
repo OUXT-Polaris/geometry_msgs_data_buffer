@@ -2,8 +2,8 @@
 
 namespace data_buffer
 {
-    PoseStampedDataBuffer::PoseStampedDataBuffer(std::shared_ptr<rclcpp::Node> node_ptr,std::string key,double buffer_length) 
-        : DataBufferBase<geometry_msgs::msg::PoseStamped>(node_ptr,key,buffer_length)
+    PoseStampedDataBuffer::PoseStampedDataBuffer(rclcpp::Clock clock,std::string key,double buffer_length) 
+        : DataBufferBase<geometry_msgs::msg::PoseStamped>(clock,key,buffer_length)
     {
 
     }
