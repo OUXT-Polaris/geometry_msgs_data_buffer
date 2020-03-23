@@ -27,7 +27,7 @@ include_directories(
   ${EIGEN3_INCLUDE_DIR}
 )
 
-add_library(geometry_msgs_data_buffer
+add_library(geometry_msgs_data_buffer SHARED
   src/point_stamped_data_buffer.cpp
   src/pose_stamped_data_buffer.cpp
   src/twist_stamped_data_buffer.cpp)
@@ -39,7 +39,10 @@ ament_export_libraries(geometry_msgs_data_buffer)
 install(TARGETS
   geometry_msgs_data_buffer
   EXPORT export_geometry_msgs_data_buffer
-  DESTINATION lib/${PROJECT_NAME}
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+  INCLUDES DESTINATION include
 )
 
 # Install header files
