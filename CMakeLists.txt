@@ -32,10 +32,13 @@ add_library(geometry_msgs_data_buffer
   src/pose_stamped_data_buffer.cpp
   src/twist_stamped_data_buffer.cpp)
 ament_target_dependencies(geometry_msgs_data_buffer rclcpp data_buffer geometry_msgs quaternion_operation)
+ament_export_interfaces(export_geometry_msgs_data_buffer HAS_LIBRARY_TARGET)
+ament_export_libraries(geometry_msgs_data_buffer)
 
 # install executables/libs
 install(TARGETS
   geometry_msgs_data_buffer
+  EXPORT export_geometry_msgs_data_buffer
   DESTINATION lib/${PROJECT_NAME}
 )
 
