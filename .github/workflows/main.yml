@@ -25,7 +25,7 @@ jobs:
                   mkdir -p ~/ros2_ws/src/geometry_msgs_data_buffer
                   cp -rf . ~/ros2_ws/src/geometry_msgs_data_buffer
                   mkdir -p ~/ros2_ws/src/data_buffer
-                  git clone https://github.com/OUXT-Polaris/data_buffer.git ~/ros2_ws/src/data_buffer
+                  git clone -b ros2 https://github.com/OUXT-Polaris/data_buffer.git ~/ros2_ws/src/data_buffer
             - name: Install dependencies
               run: |
                   source /opt/ros/eloquent/setup.bash
