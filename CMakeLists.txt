@@ -21,6 +21,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(data_buffer REQUIRED)
 find_package(quaternion_operation REQUIRED)
 find_package(Eigen3 REQUIRED)
+find_package(tf2_ros REQUIRED)
 
 include_directories(
   include
@@ -31,7 +32,7 @@ add_library(geometry_msgs_data_buffer SHARED
   src/point_stamped_data_buffer.cpp
   src/pose_stamped_data_buffer.cpp
   src/twist_stamped_data_buffer.cpp)
-ament_target_dependencies(geometry_msgs_data_buffer rclcpp data_buffer geometry_msgs quaternion_operation)
+ament_target_dependencies(geometry_msgs_data_buffer rclcpp data_buffer geometry_msgs quaternion_operation tf2_ros)
 ament_export_interfaces(export_geometry_msgs_data_buffer HAS_LIBRARY_TARGET)
 ament_export_libraries(geometry_msgs_data_buffer)
 
