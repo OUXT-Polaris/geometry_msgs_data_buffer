@@ -15,16 +15,19 @@
   <build_depend>rclcpp</build_depend>
   <build_depend>quaternion_operation</build_depend>
   <build_depend>eigen</build_depend>
+  <build_depend>tf2_ros</build_depend>
   <build_export_depend>data_buffer</build_export_depend>
   <build_export_depend>geometry_msgs</build_export_depend>
   <build_export_depend>rclcpp</build_export_depend>
   <build_export_depend>quaternion_operation</build_export_depend>
   <build_export_depend>eigen</build_export_depend>
+  <build_export_depend>tf2_ros</build_export_depend>
   <exec_depend>data_buffer</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>rclcpp</exec_depend>
   <exec_depend>quaternion_operation</exec_depend>
   <exec_depend>eigen</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
