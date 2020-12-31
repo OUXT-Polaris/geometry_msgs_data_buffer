@@ -16,12 +16,9 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(geometry_msgs REQUIRED)
-find_package(data_buffer REQUIRED)
-find_package(quaternion_operation REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 find_package(Eigen3 REQUIRED)
-find_package(tf2_ros REQUIRED)
 
 include_directories(
   include
@@ -33,7 +30,7 @@ add_library(geometry_msgs_data_buffer SHARED
   src/pose_stamped_data_buffer.cpp
   src/twist_stamped_data_buffer.cpp)
 ament_target_dependencies(geometry_msgs_data_buffer rclcpp data_buffer geometry_msgs quaternion_operation tf2_ros)
-ament_export_interfaces(export_geometry_msgs_data_buffer HAS_LIBRARY_TARGET)
+ament_export_targets(export_geometry_msgs_data_buffer HAS_LIBRARY_TARGET)
 ament_export_libraries(geometry_msgs_data_buffer)
 
 # install executables/libs
@@ -53,16 +50,8 @@ install(
 )
 
 if(BUILD_TESTING)
-find_package(ament_lint_auto REQUIRED)
-# the following line skips the linter which checks for copyrights
-# uncomment the line when a copyright and license is not present in all source files
-#set (ament_cmake_copyright_FOUND TRUE)
-# the following line skips cpplint (only works in a git repo)
-# uncomment the line when this package is not in a git repo
-#set (ament_cmake_cpplint_FOUND TRUE)
-ament_lint_auto_find_test_dependencies()
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_export_dependencies(rosidl_default_runtime)
-ament_export_include_directories(include)
-ament_package()
+ament_auto_package()
