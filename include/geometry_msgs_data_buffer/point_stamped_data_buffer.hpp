@@ -20,7 +20,6 @@
 
 // headers in ROS
 #include <geometry_msgs/msg/point_stamped.hpp>
-
 #include <string>
 
 namespace data_buffer
@@ -33,8 +32,7 @@ public:
 
 private:
   geometry_msgs::msg::PointStamped interpolate(
-    geometry_msgs::msg::PointStamped data0,
-    geometry_msgs::msg::PointStamped data1,
+    geometry_msgs::msg::PointStamped data0, geometry_msgs::msg::PointStamped data1,
     rclcpp::Time stamp) override;
 };
 }  // namespace data_buffer

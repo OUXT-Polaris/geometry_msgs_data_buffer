@@ -19,9 +19,9 @@
 #include <data_buffer/data_buffer_base.hpp>
 
 // headers in ROS
-#include <geometry_msgs/msg/pose_stamped.hpp>
 #include <quaternion_operation/quaternion_operation.h>
 
+#include <geometry_msgs/msg/pose_stamped.hpp>
 #include <string>
 
 namespace data_buffer
@@ -34,8 +34,7 @@ public:
 
 private:
   geometry_msgs::msg::PoseStamped interpolate(
-    geometry_msgs::msg::PoseStamped data0,
-    geometry_msgs::msg::PoseStamped data1,
+    geometry_msgs::msg::PoseStamped data0, geometry_msgs::msg::PoseStamped data1,
     rclcpp::Time stamp) override;
 };
 }  // namespace data_buffer
