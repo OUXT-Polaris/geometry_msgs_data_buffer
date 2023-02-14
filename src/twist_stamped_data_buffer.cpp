@@ -18,7 +18,7 @@
 namespace data_buffer
 {
 TwistStampedDataBuffer::TwistStampedDataBuffer(
-  rclcpp::Clock::SharedPtr clock, std::string key, double buffer_length)
+  rclcpp::Clock::SharedPtr clock, const std::string & key, double buffer_length)
 : DataBufferBase<geometry_msgs::msg::TwistStamped>(clock, key, buffer_length)
 {
 }
@@ -26,8 +26,8 @@ TwistStampedDataBuffer::TwistStampedDataBuffer(
 TwistStampedDataBuffer::~TwistStampedDataBuffer() {}
 
 geometry_msgs::msg::TwistStamped TwistStampedDataBuffer::interpolate(
-  geometry_msgs::msg::TwistStamped data0, geometry_msgs::msg::TwistStamped data1,
-  rclcpp::Time stamp)
+  const geometry_msgs::msg::TwistStamped & data0, const geometry_msgs::msg::TwistStamped & data1,
+  const rclcpp::Time & stamp)
 {
   geometry_msgs::msg::TwistStamped ret;
   assert(data0.header.frame_id == data1.header.frame_id);

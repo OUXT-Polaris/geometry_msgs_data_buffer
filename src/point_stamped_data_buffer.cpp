@@ -18,7 +18,7 @@
 namespace data_buffer
 {
 PointStampedDataBuffer::PointStampedDataBuffer(
-  rclcpp::Clock::SharedPtr clock, std::string key, double buffer_length)
+  rclcpp::Clock::SharedPtr clock, const std::string & key, double buffer_length)
 : DataBufferBase<geometry_msgs::msg::PointStamped>(clock, key, buffer_length)
 {
 }
@@ -26,8 +26,8 @@ PointStampedDataBuffer::PointStampedDataBuffer(
 PointStampedDataBuffer::~PointStampedDataBuffer() {}
 
 geometry_msgs::msg::PointStamped PointStampedDataBuffer::interpolate(
-  geometry_msgs::msg::PointStamped data0, geometry_msgs::msg::PointStamped data1,
-  rclcpp::Time stamp)
+  const geometry_msgs::msg::PointStamped & data0, const geometry_msgs::msg::PointStamped & data1,
+  const rclcpp::Time & stamp)
 {
   geometry_msgs::msg::PointStamped ret;
   assert(data0.header.frame_id == data1.header.frame_id);
